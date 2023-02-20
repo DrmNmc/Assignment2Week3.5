@@ -1,12 +1,12 @@
 ﻿using System;
 
-namespace PrivateMultipleObjects
+namespace ProtectedMultipleObjects
 {
     class Club
     {
-        private string name;
-        private int foundationYear;
-        private string country;
+        protected string name;
+        protected int foundationYear;
+        protected string country;
 
         public Club()
         {

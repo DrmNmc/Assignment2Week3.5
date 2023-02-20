@@ -1,68 +1,127 @@
 ﻿using System;
 
-namespace AnimalInheritance
+namespace PrivateMultipleObjects
 {
-    class Animal
+    class Club
     {
         private string name;
-        protected string type;
-        public string color;
+        private int foundationYear;
+        private string country;
+
+        public Club()
+        {
+            this.name = "";
+            this.foundationYear = 0;
+            this.country = "";
+        }
+
+        public Club(string name, int foundationYear, string country)
+        {
+            this.name = name;
+            this.foundationYear = foundationYear;
+            this.country = country;
+        }
+
+        public string GetName()
+        {
+            return this.name;
+        }
 
         public void SetName(string name)
         {
             this.name = name;
         }
 
-        public virtual string GetName()
+        public int GetFoundationYear()
         {
-            return this.name;
+            return this.foundationYear;
         }
 
-        public void SetType(string type)
+        public void SetFoundationYear(int year)
         {
-            this.type = type;
+            this.foundationYear = year;
         }
 
-        public virtual string GetType()
+        public string GetCountry()
         {
-            return this.type;
+            return this.country;
+        }
+
+        public void SetCountry(string country)
+        {
+            this.country = country;
+        }
+
+        public virtual void Add()
+        {
+            Console.WriteLine("Adding a new Club...");
+        }
+
+        public virtual void Change()
+        {
+            Console.WriteLine("Changing an existing Club...");
+        }
+
+        public virtual void Display()
+        {
+            Console.WriteLine("Displaying a Club...");
         }
     }
 
-    class Bird : Animal
+    class NerdClub : Club
     {
-        private bool canFly;
-        protected int wingspan;
-        public string habitat;
+        private string topic;
+        private int memberCount;
 
-        public void SetCanFly(bool canFly)
+        public NerdClub()
         {
-            this.canFly = canFly;
+            this.topic = "";
+            this.memberCount = 0;
         }
 
-        public bool GetCanFly()
+        public NerdClub(string name, int foundationYear, string country, string topic, int memberCount)
+            : base(name, foundationYear, country)
         {
-            return this.canFly;
+            this.topic = topic;
+            this.memberCount = memberCount;
         }
 
-        public void SetWingspan(int wingspan)
+        public string GetTopic()
         {
-            this.wingspan = wingspan;
+            return this.topic;
         }
 
-        public int GetWingspan()
+        public void SetTopic(string topic)
         {
-            return this.wingspan;
+            this.topic = topic;
         }
 
-        public override string GetName()
+        public int GetMemberCount()
         {
-            return "The " + base.GetType() + " bird named " + base.GetName();
+            return this.memberCount;
         }
 
-        public override string GetType()
+        public void SetMemberCount(int count)
         {
-            return "Bird";
+            this.memberCount = count;
+        }
+
+        public override void Add()
+        {
+            base.Add();
+            Console.WriteLine("Adding a new Nerd Club...");
+        }
+
+        public override void Change()
+        {
+            base.Change();
+            Console.WriteLine("Changing an existing Nerd Club...");
+        }
+
+        public override void Display()
+        {
+            base.Display();
+            Console.WriteLine("Displaying a Nerd Club...");
         }
     }
 
@@ -70,20 +129,19 @@ namespace AnimalInheritance
     {
         static void Main(string[] args)
         {
-            Animal myAnimal = new Animal();
-            myAnimal.SetName("Leo");
-            myAnimal.SetType("Lion");
-            myAnimal.color = "golden";
-            Console.WriteLine($"My animal is a {myAnimal.GetType()} named {myAnimal.GetName()} and is {myAnimal.color} in color.");
+            Club[] clubs = new Club[2];
+            clubs[0] = new Club("Football Club", 1890, "England");
+            clubs[1] = new NerdClub("Computer Club", 1995, "USA", "Programming", 20);
 
-            Bird myBird = new Bird();
-            myBird.SetName("Eagle");
-            myBird.SetType("Bald");
-            myBird.color = "brown";
-            myBird.SetCanFly(true);
-            myBird.SetWingspan(6);
-            myBird.habitat = "mountains";
-            Console.WriteLine($"My bird is a {myBird.GetType()} named {myBird.GetName()}, has a wingspan of {myBird.GetWingspan()} feet, and lives in {myBird.habitat}.");
+            Console.WriteLine("Base class:");
+            clubs[0].Display();
+            clubs[0].Add();
+            clubs[0].Change();
+
+            Console.WriteLine("\nDerived class:");
+            clubs[1].Display();
+            clubs[1].Add();
+            clubs[1].Change();
         }
     }
 }

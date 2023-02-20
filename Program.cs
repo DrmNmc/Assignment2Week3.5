@@ -1,78 +1,68 @@
 ﻿using System;
 
-namespace SimpleInheritance
+namespace AnimalInheritance
 {
     class Animal
     {
-        public string name;
+        private string name;
+        protected string type;
+        public string color;
 
-        public Animal()
-        {
-            name = "";
-        }
-
-        public Animal(string name)
+        public void SetName(string name)
         {
             this.name = name;
         }
 
-        public void Display()
+        public virtual string GetName()
         {
-            Console.WriteLine($"I am an animal, my name is {name}");
+            return this.name;
+        }
+
+        public void SetType(string type)
+        {
+            this.type = type;
+        }
+
+        public virtual string GetType()
+        {
+            return this.type;
         }
     }
 
-    class Cat : Animal
+    class Bird : Animal
     {
-        public int age;
-        public string color;
-        public string breed;
+        private bool canFly;
+        protected int wingspan;
+        public string habitat;
 
-        public Cat()
+        public void SetCanFly(bool canFly)
         {
-            age = 0;
-            color = "";
-            breed = "";
+            this.canFly = canFly;
         }
 
-        public Cat(string name, int age, string color, string breed)
-            : base(name)
+        public bool GetCanFly()
         {
-            this.age = age;
-            this.color = color;
-            this.breed = breed;
+            return this.canFly;
         }
 
-        public void DisplayDetails()
+        public void SetWingspan(int wingspan)
         {
-            Console.WriteLine($"I am a {breed} cat, my name is {name}, I am {age} years old, and I am {color}.");
-        }
-    }
-
-    class Dog : Animal
-    {
-        public string breed;
-        public string size;
-        public int age;
-
-        public Dog()
-        {
-            breed = "";
-            size = "";
-            age = 0;
+            this.wingspan = wingspan;
         }
 
-        public Dog(string name, string breed, string size, int age)
-            : base(name)
+        public int GetWingspan()
         {
-            this.breed = breed;
-            this.size = size;
-            this.age = age;
+            return this.wingspan;
         }
 
-        public void DisplayDetails()
+        public override string GetName()
         {
-            Console.WriteLine($"I am a {size} {breed}, my name is {name}, I am {age} years old.");
+            return "The " + base.GetType() + " bird named " + base.GetName();
+        }
+
+        public override string GetType()
+        {
+            return "Bird";
         }
     }
 
@@ -80,25 +70,20 @@ namespace SimpleInheritance
     {
         static void Main(string[] args)
         {
-            Cat myCat = new Cat();
-            myCat.name = "Socks";
-            myCat.age = 2;
-            myCat.color = "black and white";
-            myCat.breed = "Siamese";
-            myCat.DisplayDetails();
+            Animal myAnimal = new Animal();
+            myAnimal.SetName("Leo");
+            myAnimal.SetType("Lion");
+            myAnimal.color = "golden";
+            Console.WriteLine($"My animal is a {myAnimal.GetType()} named {myAnimal.GetName()} and is {myAnimal.color} in color.");
 
-            Cat myOtherCat = new Cat("Mittens", 5, "gray", "Persian");
-            myOtherCat.DisplayDetails();
-
-            Dog myDog = new Dog();
-            myDog.name = "Rex";
-            myDog.breed = "Labrador";
-            myDog.size = "medium";
-            myDog.age = 3;
-            myDog.DisplayDetails();
-
-            Dog myOtherDog = new Dog("Sir Winston the Pooh Bear", "Golden Retriever", "chonky", 4);
-            myOtherDog.DisplayDetails();
+            Bird myBird = new Bird();
+            myBird.SetName("Eagle");
+            myBird.SetType("Bald");
+            myBird.color = "brown";
+            myBird.SetCanFly(true);
+            myBird.SetWingspan(6);
+            myBird.habitat = "mountains";
+            Console.WriteLine($"My bird is a {myBird.GetType()} named {myBird.GetName()}, has a wingspan of {myBird.GetWingspan()} feet, and lives in {myBird.habitat}.");
         }
     }
 }

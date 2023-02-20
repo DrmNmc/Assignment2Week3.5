@@ -49,6 +49,33 @@ namespace SimpleInheritance
         }
     }
 
+    class Dog : Animal
+    {
+        public string breed;
+        public string size;
+        public int age;
+
+        public Dog()
+        {
+            breed = "";
+            size = "";
+            age = 0;
+        }
+
+        public Dog(string name, string breed, string size, int age)
+            : base(name)
+        {
+            this.breed = breed;
+            this.size = size;
+            this.age = age;
+        }
+
+        public void DisplayDetails()
+        {
+            Console.WriteLine($"I am a {size} {breed}, my name is {name}, I am {age} years old.");
+        }
+    }
+
     class Program
     {
         static void Main(string[] args)
@@ -58,11 +85,20 @@ namespace SimpleInheritance
             myCat.age = 2;
             myCat.color = "black and white";
             myCat.breed = "Siamese";
-
             myCat.DisplayDetails();
 
             Cat myOtherCat = new Cat("Mittens", 5, "gray", "Persian");
             myOtherCat.DisplayDetails();
+
+            Dog myDog = new Dog();
+            myDog.name = "Rex";
+            myDog.breed = "Labrador";
+            myDog.size = "medium";
+            myDog.age = 3;
+            myDog.DisplayDetails();
+
+            Dog myOtherDog = new Dog("Sir Winston the Pooh Bear", "Golden Retriever", "chonky", 4);
+            myOtherDog.DisplayDetails();
         }
     }
 }
